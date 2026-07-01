@@ -1,0 +1,21 @@
+# Runtime data — don't commit
+qdrant_storage/
+ollama_models/
+
+# Generated OKF content and PDFs
+okf/*
+!okf/.gitkeep
+pdfs/*
+!pdfs/.gitkeep
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# Env overrides
+.env.local
+.env
