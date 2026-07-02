@@ -1,6 +1,7 @@
 # Runtime data — don't commit
 qdrant_storage/
 ollama_models/
+webui_data/
 
 # Generated OKF content and PDFs
 okf/*
