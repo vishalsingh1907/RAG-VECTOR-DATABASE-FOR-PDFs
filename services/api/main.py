@@ -178,7 +178,7 @@ def build_generation_prompt(context: str, question: str) -> str:
     return dedent(f"""\
         Answer the question using ONLY the context below.
         Cite the source in brackets after each claim, e.g. [Document Title, pages 12-14].
-        If the context does not contain the answer, say "I don't have enough information in the knowledge base to answer this."
+        If the context does not contain the answer, say "I am designed to only answer questions based on the provided database, and your query was not found in it."
 
         Context:
         {context}
@@ -232,7 +232,7 @@ def ask(req: AskRequest):
     sources = retrieve(req.question, req.top_k)
     if not sources:
         return {
-            "answer": "No relevant documents found in the knowledge base.",
+            "answer": "I am designed to only answer questions based on the provided database, and your query was not found in it.",
             "verification": "N/A",
             "grounded": False,
             "sources": [],
@@ -299,7 +299,7 @@ def chat_completions(req: ChatCompletionRequest):
     sources = retrieve(question, top_k=6)
     context = build_context_block(sources) if sources else ""
 
-    gen_prompt = build_generation_prompt(context, question) if context else question
+    gen_prompt = build_generation_prompt(context, question)
 
     # ── Non-streaming ──
     if not req.stream:
